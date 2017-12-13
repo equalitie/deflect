@@ -21,10 +21,19 @@ keep control of your data and therefore respect visitors' privacy.
 
 ## Who is it for?
 
+Civil society organisations wanting to defend their and their partners' web
+sites at reasonable cost, with trustworthy software and while safeguarding
+privacy. Many organisations have emphasised the importance not to sacrifice
+privacy for DDoS protection. By running your own Deflect, there will be no
+third-party middleman to your web traffic.
+
+Deflect integrates a user-friendly web-based dashboard for both users and system
+administrators. It therefore makes it easier to set up a commercial,
+user-oriented DDoS protection service.
+
 ## Architecture
 
 ## Software components
-
 
 ## Installation
 
