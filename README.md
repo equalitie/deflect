@@ -35,6 +35,18 @@ user-oriented DDoS protection service.
 
 ## Software components
 
+### Core Deflect
+
+### Network health monitoring
+
+### Static log analysis
+
+### Web-based dashboards
+
+### Controller data backup
+
+### Dynamic log analysis
+
 ## Installation
 
 ## Authors
