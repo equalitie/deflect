@@ -50,3 +50,8 @@ user-oriented DDoS protection service.
 ## Installation
 
 ## Authors
+
+The initial development of Deflect components was done by numerous
+[eQualit.ie](https://equalit.ie) employees throughout the years as the service
+was improving. A significant amount of this repository is based or inspired from
+this work, and is also performed by eQualit.ie Deflect staff.
