@@ -33,7 +33,8 @@ user-oriented DDoS protection service.
 
 ## Requirements
 
-Debian 9 (Stretch) is required on all systems involved.
+Debian 9 (Stretch) is required on all systems involved. The package `python`
+must be installed.
 
 ## Deflect infrastructure architecture
 
