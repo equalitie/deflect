@@ -49,6 +49,15 @@ user-oriented DDoS protection service.
 
 ## Installation
 
+The installation procedure will be given with more details as the project
+implementation comes nearer to something deployable. It will roughly be as
+follows:
+
+1. obtain some virtual and/or physical servers;
+2. clone the [Deflect Ansible repository](https://github.com/equalitie/deflect);
+3. configure Ansible's inventory, host and group variables;
+4. use `ansible-playbook` to setup the entire infrastructure.
+
 ## Authors
 
 The initial development of Deflect components was done by numerous
