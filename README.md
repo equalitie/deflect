@@ -81,6 +81,16 @@ be determined.
 
 ### Dynamic log analysis
 
+This component allows to run interactive analysis of the web access logs
+produced by ATS and the banning logs produced by Banjax. It includes:
+
+- Elasticsearch, Logstash and Kibana (the [ELK](https://www.elastic.co/) suite),
+  running on one or several dedicated machines depending on the amount of logs
+  processed;
+- [Filebeat](https://www.elastic.co/products/beats/filebeat), use to transmit
+  the logs from the edges to the Logstash service, which itself inserts the
+  events into the Elasticsearch cluster.
+
 ## Installation
 
 The installation procedure will be given with more details as the project
