@@ -31,6 +31,10 @@ Deflect integrates a user-friendly web-based dashboard for both users and system
 administrators. It therefore makes it easier to set up a commercial,
 user-oriented DDoS protection service.
 
+## Requirements
+
+Debian 9 (Stretch) is required on all systems involved.
+
 ## Architecture
 
 ## Software components
