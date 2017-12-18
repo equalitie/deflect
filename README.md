@@ -78,6 +78,28 @@ be determined.
 
 ### Web-based dashboards
 
+This component installs web-based dashboards, generally on a dedicated system,
+or possibly on the controller. There are two dashboards:
+
+- the user dashboard, meant to allow owners of websites protected by Deflect to
+  tweak their protection parameters (caching time, TLS certificates, DNS
+  records…) and look at their visit statistics from an user-friendly interface
+  available in several languages;
+- the administration dashboard, from which system administrators can more easily
+  change settings for any website.
+
+The dashboards make an extremely valuable component since they allow Deflect
+users to control their protection configuration and they let system
+administrators perform most configuration changes without the risks associated
+to a `root` terminal on the controller.
+
+Without dashboard, all configuration modifications must be done by editing
+Ansible configuration files on the controller server, and is thus reserved to
+system administrators.
+
+Therefore, it is recommended to install the dashboard if you plan to provide a
+protection for numerous third parties.
+
 ### Controller data backup
 
 ### Dynamic log analysis
