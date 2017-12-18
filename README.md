@@ -37,6 +37,27 @@ user-oriented DDoS protection service.
 
 ### Core Deflect
 
+Core Deflect is the basic component letting you run a minimalistic but
+functional DDoS protection system. It includes:
+
+- system security hardening measures for all servers (enforcing key-based SSH
+  access, for instance);
+- the web caching proxy [Apache Traffic
+  Server](https://trafficserver.apache.org/) (ATS) on edges, used to cache and
+  serve the pages hosted on origin servers as well as detect and block malicious
+  traffic thanks to our ATS module [Banjax](https://github.com/equalitie/banjax)
+  and banning engine [Swabber](https://github.com/equalitie/swabber);
+- the [Bind](https://www.isc.org/downloads/bind/) DNS server and our DNS-based
+  load balancing engine [EdgeManage](https://github.com/equalitie/edgemanage) on
+  the controller, to continuously choose the fastest edges to serve websites;
+- the [Let's Encrypt](https://letsencrypt.org/) client
+  [certbot](https://certbot.eff.org/) accompanied with proper system
+  configuration and ATS configuraton, to be able to generate TLS certificates
+  automatically for protected websites;
+- a copy of the [Deflect Ansible](https://github.com/equalitie/deflect)
+  repository on the controller, as some roles are used periodically to update
+  edges after configuration changes on protected websites.
+
 ### Network health monitoring
 
 ### Static log analysis
