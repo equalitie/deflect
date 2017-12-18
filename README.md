@@ -35,7 +35,9 @@ user-oriented DDoS protection service.
 
 Debian 9 (Stretch) is required on all systems involved.
 
-## Architecture
+## Deflect infrastructure architecture
+
+To do.
 
 ## Software components
 
