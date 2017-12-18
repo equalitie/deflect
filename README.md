@@ -66,6 +66,13 @@ functional DDoS protection system. It includes:
 
 ### Network health monitoring
 
+This component adds health monitoring to the Deflect infrastructure, to allow
+system administrators to keep an eye on the global state of the network and be
+alerted in case of problem.
+
+This monitoring will be performed by Nagios, Shinken or a similar software, to
+be determined.
+
 ### Static log analysis
 
 ### Web-based dashboards
