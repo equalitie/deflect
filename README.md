@@ -76,6 +76,21 @@ be determined.
 
 ### Static log analysis
 
+This component installs software to produce static HTML pages containing
+statistics graphs based on the web visits as logged by the edges. The process to
+do so is:
+
+- the log files are copied once a day from all edges to a dedicated crunching
+  server;
+- the crunching server processes all these logs with awstats, which produces
+  HTML files and images;
+- the HTML pages are sent to a dedicated machine, possibly the controller, and
+  made available to be consulted via HTTP.
+
+The crunching process can be very CPU-intensive when the amount of logs
+increase, and it is recommended that a dedicated crunching machine is used as
+soon as the amount of traffic becomes important.
+
 ### Web-based dashboards
 
 This component installs web-based dashboards, generally on a dedicated system,
