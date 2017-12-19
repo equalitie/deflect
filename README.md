@@ -150,6 +150,9 @@ produced by ATS and the banning logs produced by Banjax. It includes:
   the logs from the edges to the Logstash service, which itself inserts the
   events into the Elasticsearch cluster.
 
+This replaces advantagely the static log analysis, but may need a heavier
+infrastructure if the volumes are high.
+
 ## Installation
 
 The installation procedure will be given with more details as the project
