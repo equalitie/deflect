@@ -96,8 +96,9 @@ do so is:
   made available to be consulted via HTTP.
 
 The crunching process can be very CPU-intensive when the amount of logs
-increase, and it is recommended that a dedicated crunching machine is used as
-soon as the amount of traffic becomes important.
+increases, and it is recommended that a dedicated crunching machine is used as
+soon as the amount of traffic becomes important. This is also the reason why the
+log crunching is performed only once a day.
 
 ### Web-based dashboards
 
