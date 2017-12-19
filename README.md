@@ -117,6 +117,14 @@ protection for numerous third parties.
 
 ### Controller data backup
 
+This component adds a periodic backup of the controller's key configuration and
+data files to another machine. The exact backup strategy has yet to be
+determined, but its main purposes are:
+
+- be able to recover old versions of data and configuration files if necessary;
+- rebuild as easily and quickly as possible a new controller should the main one
+  be lost.
+
 ### Dynamic log analysis
 
 This component allows to run interactive analysis of the web access logs
