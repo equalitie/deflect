@@ -74,6 +74,14 @@ alerted in case of problem.
 This monitoring will be performed by Nagios, Shinken or a similar software, to
 be determined.
 
+Key monitored components include:
+
+- a ping of all servers involved in the infrastructure;
+- the HTTP response time of all edges;
+- whether or not edges configuration is up-to-date with the configuration on the
+  controller;
+- the validity of TLS certificates on edges for all protected websites.
+
 ### Static log analysis
 
 This component installs software to produce static HTML pages containing
