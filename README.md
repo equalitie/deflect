@@ -115,7 +115,11 @@ or possibly on the controller. There are two dashboards:
 The dashboards make an extremely valuable component since they allow Deflect
 users to control their protection configuration and they let system
 administrators perform most configuration changes without the risks associated
-to a `root` terminal on the controller.
+to a `root` shell on the controller.
+
+Concretely, changes made through the web dashboards will be pulled by the
+controller and then pushed as changes onto the relevant parts: ATS configuration
+files for caching-related changes, DNS zone files for DNS changes, etc.
 
 Without dashboard, all configuration modifications must be done by editing
 Ansible configuration files on the controller server, and is thus reserved to
