@@ -1,14 +1,18 @@
 # Role `generic-system-hardening`
 
-## Actions performed on the target system
+## State of target system after role execution
 
-- adds Debian security updates repository if necessary;
-- configures the OpenSSH server to only accept public key authentication (no
-  password);
-- exclusively allows a specific set of users to SSH into the server;
-- installs `sudo` if not present and sets a specific list of users to be able to
-  use `sudo`;
-- sets users' encrypted passwords if specified (to be used for `sudo`).
+- the Debian security updates repository is in the `apt` list of sources;
+- the OpenSSH server is configured to only accept public keys for
+  authentification;
+- only a white list of users is allowed to SSH into the system;
+- `sudo` is installed and only a white list of users can acquire superuser
+  priviledges with `sudo`;
+- users who did not have a password have their password initialised with a hash
+  specified in the role's input data;
+- users who already had a password set keep their password unless the role's
+  input data explicitly specifies to reinitialise it in addition to providing a
+  hash.
 
 ## Input data
 
