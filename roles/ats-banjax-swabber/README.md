@@ -8,7 +8,9 @@
   installed as an ATS module, and its source code is not kept;
 - ATS is configured to load and use the banjax module;
 - [swabber](https://github.com/equalitie/swabber) is compiled from source and
-  installed, and the source code is not kept.
+  installed, and the source code is not kept;
+- software packages required for compilation but not for run time are not kept
+  on the system.
 
 ## Input data
 
