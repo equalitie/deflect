@@ -4,3 +4,7 @@
     state: present
     update_cache: yes
 
+- name: Install sudo
+  apt:
+    pkg: sudo
+    state: installed
