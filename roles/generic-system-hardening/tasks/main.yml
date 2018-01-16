@@ -1,0 +1,4 @@
+---
+
+- import_tasks: install.yml
+  tags: ["generic-system-hardening", "install", "install_generic-system-hardening"]
