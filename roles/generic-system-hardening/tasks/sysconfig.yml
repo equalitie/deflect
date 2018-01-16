@@ -1,2 +1,8 @@
 ---
 
+- name: Create group for users allowed to SSH in
+  group:
+    name: "{{ deflect_ssh_allow_group_name }}"
+    state: present
+
+
