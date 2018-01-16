@@ -2,3 +2,6 @@
 
 - import_tasks: install.yml
   tags: ["generic-system-hardening", "install", "install_generic-system-hardening"]
+
+- import_tasks: sysconfig.yml
+  tags: ["generic-system-hardening", "sysconfig", "sysconfig_generic-system-hardening"]
