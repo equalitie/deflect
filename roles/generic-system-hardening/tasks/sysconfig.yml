@@ -5,4 +5,9 @@
     name: "{{ deflect_ssh_allow_group_name }}"
     state: present
 
-
+- name: Add allowed users to SSH group
+  user:
+    name: "{{ item.login }}"
+    groups: "{{ deflect_ssh_allow_group_name }}"
+    state: present
+  with_items: "{{ deflect_ssh_users }}"
