@@ -2,15 +2,18 @@
 
 ## State of target system after role execution
 
-- Apache Traffic Server (ATS) is compiled from source and installed on the
-  system, and the source code is not kept on the system;
-- [Banjax](https://github.com/equalitie/banjax) is compiled from source and
-  installed as an ATS module, and its source code is not kept;
+- Apache Traffic Server (ATS) is installed on the target system solely in binary
+  form (the role provides the option to either compile the binaries from source
+  on the target — in which case neither the source code or the build-time
+  dependencies are kept on the target after compilation — or to fetch them in
+  binary form from a location given by input data);
+- [Banjax](https://github.com/equalitie/banjax) is installed as an ATS module
+  and kept on the target only in binary form (as above, the role supports
+  on-target compilation as well as fetching the binary);
 - ATS is configured to load and use the banjax module;
-- [swabber](https://github.com/equalitie/swabber) is compiled from source and
-  installed, and the source code is not kept;
-- software packages required for compilation but not for run time are not kept
-  on the system.
+- [swabber](https://github.com/equalitie/swabber) is installed on the target
+  system solely in binary form (as above, the role supports on-target
+  compilation as well fetching as the binary).
 
 ## Input data
 
