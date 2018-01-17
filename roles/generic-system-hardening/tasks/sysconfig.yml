@@ -13,3 +13,9 @@
     append: yes
   with_items: "{{ deflect_ssh_users|default([ansible_user]) }}"
 
+- name: Fetch SSH group configuration
+  getent:
+    database: group
+    split: ':'
+    key: "{{ deflect_ssh_allow_group_name }}"
+
