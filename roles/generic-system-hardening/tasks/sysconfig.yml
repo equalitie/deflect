@@ -5,17 +5,25 @@
     name: "{{ deflect_ssh_allow_group_name }}"
     state: present
 
+- set_fact: 
+    ssh_logins_flatlist: "{{ ssh_logins_flatlist|default([]) + [item.login] }}"
+  with_items: "{{ deflect_ssh_users }}"
+
 - name: Add allowed users to SSH group
   user:
-    name: "{{ item.login }}"
+    name: "{{ item }}"
     groups: "{{ deflect_ssh_allow_group_name }}"
     state: present
     append: yes
-  with_items: "{{ deflect_ssh_users|default([ansible_user]) }}"
+  with_items: "{{ ssh_logins_flatlist }}"
 
 - name: Fetch SSH group configuration
   getent:
     database: group
     split: ':'
     key: "{{ deflect_ssh_allow_group_name }}"
+
+- set_fact:
+    ssh_logins_actual_flatlist: "{{ getent_group[deflect_ssh_allow_group_name][2].split(',') }}"
+
 
