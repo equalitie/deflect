@@ -26,4 +26,7 @@
 - set_fact:
     ssh_logins_actual_flatlist: "{{ getent_group[deflect_ssh_allow_group_name][2].split(',') }}"
 
-
+- name: Remove users that should not be allowed from SSH group
+  command: "gpasswd -d {{ item }} {{ deflect_ssh_allow_group_name }}"
+  with_items: "{{ ssh_logins_actual_flatlist }}"
+  when: "item not in ssh_logins_flatlist"
