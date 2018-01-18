@@ -1,3 +1,5 @@
 ---
 
 deflect_ssh_allow_group_name: "deflect-ssh"
+ssh_listen_ports:
+  - "{{ ansible_ssh_port | default(22) }}"
