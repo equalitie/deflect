@@ -30,3 +30,8 @@
   command: "gpasswd -d {{ item }} {{ deflect_ssh_allow_group_name }}"
   with_items: "{{ ssh_logins_actual_flatlist }}"
   when: "item not in ssh_logins_flatlist"
+
+- set_fact:
+    sudo_logins_flatlist: "{{ sudo_logins_flatlist|default([]) + [item.login] }}"
+  with_items: "{{ deflect_ssh_users }}"
+  when: "item.sudo | default(False)"
