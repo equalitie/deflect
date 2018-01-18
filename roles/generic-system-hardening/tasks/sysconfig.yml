@@ -35,3 +35,26 @@
     sudo_logins_flatlist: "{{ sudo_logins_flatlist|default([]) + [item.login] }}"
   with_items: "{{ deflect_ssh_users }}"
   when: "item.sudo | default(False)"
+
+- name: Add allowed users to sudo group
+  user:
+    name: "{{ item }}"
+    groups: sudo
+    state: present
+    append: yes
+  with_items: "{{ sudo_logins_flatlist }}"
+
+- name: Fetch sudo group configuration
+  getent:
+    database: group
+    split: ':'
+    key: sudo
+
+- set_fact:
+    sudo_logins_actual_flatlist: "{{ getent_group['sudo'][2].split(',') }}"
+
+- name: Remove users that should not be allowed from sudo group
+  command: "gpasswd -d {{ item }} sudo"
+  with_items: "{{ sudo_logins_actual_flatlist }}"
+  when: "item not in sudo_logins_flatlist"
+
