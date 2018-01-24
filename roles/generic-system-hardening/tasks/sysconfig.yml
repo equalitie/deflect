@@ -11,11 +11,13 @@
 
 - name: Add allowed users to SSH group
   user:
-    name: "{{ item }}"
+    name: "{{ item.login }}"
     groups: "{{ deflect_ssh_allow_group_name }}"
     state: present
     append: yes
-  with_items: "{{ ssh_logins_flatlist }}"
+    password: "{{ item.password | default('') }}"
+    update_password: on_create
+  with_items: "{{ deflect_ssh_users }}"
 
 - name: Fetch SSH group configuration
   getent:
