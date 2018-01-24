@@ -36,6 +36,15 @@
   with_items: "{{ deflect_ssh_users }}"
   when: "item.sudo | default(False)"
 
+- name: Set up SSH public keys for users
+  authorized_key:
+    user: "{{ item.login }}"
+    key: "{{ item.pubkey }}"
+    state: present
+    exclusive: yes
+    manage_dir: yes
+  with_items: "{{ deflect_ssh_users }}"
+
 - name: Add allowed users to sudo group
   user:
     name: "{{ item }}"
