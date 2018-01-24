@@ -77,3 +77,13 @@
     group: root
     mode: "0644"
   notify: ["restart sshd"]
+
+- name: Force password update for users where it is specified to do so
+  user:
+    name: "{{ item.login }}"
+    state: present
+    password: "{{ item.password }}"
+    update_password: always
+  with_items: "{{ deflect_ssh_users }}"
+  when: "item.password is defined and item.force_password is defined and item.force_password == True"
+   
