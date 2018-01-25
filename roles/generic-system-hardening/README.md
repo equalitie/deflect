@@ -63,4 +63,8 @@ deflect_ssh_users:
 
 ### Optional
 
+#### `ssh_listen_ports` (list of integers)
 
+List of TCP ports the OpenSSH daemon will listen on.
+
+Default: only port 22.
