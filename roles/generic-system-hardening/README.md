@@ -63,6 +63,12 @@ deflect_ssh_users:
 
 ### Optional
 
+#### `deflect_ssh_allow_group_name` (string)
+
+UNIX group name that will contain the users allowed to SSH into the system.
+
+Default: `deflect-ssh`
+
 #### `ssh_listen_ports` (list of integers)
 
 List of TCP ports the OpenSSH daemon will listen on.
