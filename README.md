@@ -38,7 +38,7 @@ must be installed.
 
 ## Deflect infrastructure architecture
 
-To do.
+See <doc/architecture.md>.
 
 ## Software components
 
