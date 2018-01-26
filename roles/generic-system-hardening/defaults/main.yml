@@ -1,6 +1,3 @@
 ---
 
 deflect_ssh_allow_group_name: "deflect-ssh"
-deflect_ssh_users:
-  - login: "{{ ansible_user }}"
-    sudo: true
