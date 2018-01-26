@@ -18,10 +18,6 @@
 
 ### Required
 
-None.
-
-### Recommended
-
 ##### `deflect_ssh_users`
 
 List of users allowed to SSH into the target system. Each item of the list
@@ -54,13 +50,9 @@ deflect_ssh_users:
       ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCg5FKGJg7oTqG2g7PNoCCLu6u0ifSXHT4WOjmiVToZu0WANbQBVGXQhfzKosVvCYzioAt/K38Z6LMqf+fRQ3rqXJhYNWsXRtogyO5BJNMmggmZYr2jXZJnmkVxlBaf2YRFUZICNkUlct6hq23nUJgZU/l1/+oCwfhSjKGr/yQ0tPmx1UG4RIwCpg0FvoSHwDQ7D0pnLLtfw0QTH+0QFTTKnmL5HSeCwZlR9/qXo/Fb7ro3bdiipTt8Otug6zs4Y2ydtMZlyDu8JkMz/2kA3k3oyD4YrDZ977AdU/9cTwrmtOTNlZqenb4IZlxWsMwsWRPSil76QB+qldXLPAGk7vcn
 ```
 
-Default:
+### Recommended
 
-```
-deflect_ssh_users:
-  - login: "{{ ansible_user }}"
-    sudo: true
-```
+None.
 
 ### Optional
 
