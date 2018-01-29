@@ -25,4 +25,13 @@ in by updating DNS records for all protected website in the dnet.
 
 ### Origin server
 
+An [origin server](https://tools.ietf.org/html/rfc7230#section-2.1) is a machine
+where the original content of a website is hosted. The edges fetch the content
+from the origin server, cache it and serve it to the public. Visitors to a
+Deflect-protected website will typically never connect to the origin directly,
+but to the edges.
+
+The origin server is outside of Deflect infrastructure and is therefore
+considered not under control of the Deflect system administrators.
+
 ## Architecture overview
