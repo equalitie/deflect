@@ -23,6 +23,17 @@ response time is continuously checked and those _in rotation_ that are too slow
 (generally because of a high traffic) are rotated out while othes are rotated
 in by updating DNS records for all protected website in the dnet.
 
+### Dnet
+
+A dnet, or Deflect network, is a set of edges that have an identical
+configuration. This means that all edges of a dnet can serve the same set of
+websites.
+
+Edges are rotated in and out always within a dnet. Dnets are configured through
+Edgemanage, which runs on the controller. Dnet configuration includes the list
+of edges in the dnet and the number of edges that must be in rotation at any
+given moment.
+
 ### Origin server
 
 An [origin server](https://tools.ietf.org/html/rfc7230#section-2.1) is a machine
