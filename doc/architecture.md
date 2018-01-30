@@ -49,6 +49,33 @@ Edgemanage, which runs on the controller. Dnet configuration includes the list
 of edges in the dnet and the number of edges that must be in rotation at any
 given moment.
 
+### Authoritative DNS and Edgemanage
+
+A website that is protected by a Deflect setup must have its DNS records managed
+by Deflect in order to ensure the edge rotation, essential to keep websites
+functional under heavy load.
+
+To this purpose, a Deflect setup includes two software components:
+
+- an authoritative DNS server that serves the entire DNS zone for each protected
+  website, including not only the `A` records pointing to edges for the website
+  itself but all other records useful to the domain owner such as various `A` or
+  `AAAA` records, `MX` records, etc.;
+- [Edgemanage](https://github.com/equalitie/edgemanage), that continuously
+  monitors edges' response times and generates the entire DNS zone file for
+  every domain based on these response times (to decide which edges are put in
+  rotation) and the other, user-configured DNS records.
+
+The authoritative DNS server's IP address should not be exposed to public
+knowledge or it would become an easily targettable single point of failure.
+Instead, it should act as a hidden primary DNS server, while more robust
+public-facing servers are exposed and replicate the zones from the hidden
+primary. Those public-facing servers must be configured as `NS` records for
+domains corresponding to Deflect-protected websites.
+
+Edgemanage and the associated authoritative DNS server may run on the controller
+server.
+
 ### Origin server
 
 An [origin server](https://tools.ietf.org/html/rfc7230#section-2.1) is a machine
