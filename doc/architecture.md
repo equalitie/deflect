@@ -88,3 +88,32 @@ The origin server is outside of Deflect infrastructure and is therefore
 considered not under control of the Deflect system administrators.
 
 ## Architecture overview
+
+
+```
+                                            visitor
+                                             o        req: site1.tld A?
+              .-----Req: http://site1.tld---/|\    ---resp: edge1 IP   --.
+              |                             / \             edge3 IP     |
+              v                                                          |
+    .------------------.                                                 |
+    |.-------..-------.|                                                 |
+    || edge1 || edge2 ||                                                 v
+    |'-------''-------'|                  .------------.          .------------.
+    |.-------..-------.|<--push config----| Controller |          | public DNS |
+    || edge3 || edge4 ||                  '------------'          '------------'
+    |'-------''-------'|                         |                       ^
+    '------------------'                         |                       |
+              |                                  |                       |
+              |                              push config               AXFR
+           HTTP request                          |                       |
+              |                                  |                       |
+              |           .-----------.          v               .---------------.
+              |           | origin    |   .------------.         | Authoritative |
+              |---------->| site1.tld |   | Edgemanage |--zone ->| DNS           |
+              |           '-----------'   '------------'  files  '---------------'
+              |           .-----------.
+              |           | origin    |
+              '---------->| site2.tld |
+                          '-----------'
+```
