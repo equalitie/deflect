@@ -4,20 +4,22 @@
 
 ### Controller
 
-The controller is a server where all Deflect configuration resides. This
-configuration includes all elements allowing to configure all edges on all dnets
-so that they can serve the appropriate websites and mitigate attacks. For
-instance:
+The controller is a server where all Deflect configuration resides. Stored as
+Ansible variables, it includes all the data allowing to configure all edges on
+all dnets so that they can serve the appropriate websites and mitigate attacks,
+as well as Edgemanage configuration.
+For instance:
 
 - every protected website's configuration such as caching time, site-specific
   HTTP requests rate limiting, DNS records, etc.;
 - generic reverse proxy configuration, banjax, configuration, etc.
 
 Whenever configuration is updated, whether it is a user configuration element
-(for instance after a Deflect user changes settings in their dashboard) or a
-system configuration (a global reverse proxy configuration change, for
-instance), the configuration files on all concerned systems is updated from the
-controller through the appropriate execute of the present Ansible playbook.
+(for instance after changing the caching time for a specific Deflect-protected
+website) or a system configuration (a global reverse proxy configuration change,
+for instance), the configuration files on all concerned systems is updated from
+the controller through the appropriate execution of the present Ansible
+playbook.
 
 ### Edge
 
