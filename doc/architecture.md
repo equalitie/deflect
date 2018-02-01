@@ -60,19 +60,20 @@ To this purpose, a Deflect setup includes two software components:
 
 - an authoritative DNS server that serves the entire DNS zone for each protected
   website, including not only the `A` records pointing to edges for the website
-  itself but all other records useful to the domain owner such as various `A` or
+  itself but all other records needed by the domain owner such as various `A` or
   `AAAA` records, `MX` records, etc.;
 - [Edgemanage](https://github.com/equalitie/edgemanage), that continuously
-  monitors edges' response times and generates the entire DNS zone file for
+  monitors edges' HTTP response times and generates the entire DNS zone file for
   every domain based on these response times (to decide which edges are put in
-  rotation) and the other, user-configured DNS records.
+  rotation) as well as the user-configured DNS records.
 
 The authoritative DNS server's IP address should not be exposed to public
 knowledge or it would become an easily targettable single point of failure.
 Instead, it should act as a hidden primary DNS server, while more robust
-public-facing servers are exposed and replicate the zones from the hidden
-primary. Those public-facing servers must be configured as `NS` records for
-domains corresponding to Deflect-protected websites.
+public-facing servers replicate zones from the hidden primary and serve them
+publicly. Those public-facing servers must be configured as `NS` records for
+domains corresponding to Deflect-protected websites. They will therefore be seen
+as authoritative DNS servers from a public standpoint.
 
 Edgemanage and the associated authoritative DNS server may run on the controller
 server.
