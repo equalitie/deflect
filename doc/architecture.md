@@ -83,8 +83,13 @@ server.
 An [origin server](https://tools.ietf.org/html/rfc7230#section-2.1) is a machine
 where the original content of a website is hosted. The edges fetch the content
 from the origin server, cache it and serve it to the public. Visitors to a
-Deflect-protected website will typically never connect to the origin directly,
-but to the edges.
+Deflect-protected website will ideally never be able to know the IP address of
+the origin server, and will only ever see Deflect edges IP addresses in the DNS
+records.
+
+Owners of Deflect-protected website must be particularly careful not to reveal
+the IP address of the origin server in the other DNS records they can set
+manually.
 
 The origin server is outside of Deflect infrastructure and is therefore
 considered not under control of the Deflect system administrators.
