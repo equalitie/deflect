@@ -28,7 +28,8 @@ represents a user and supports the following keys:
   access;
 - `password` (string): encrypted UNIX password for the user, following the
   `/etc/shadow` format (see the `mkpasswd` tool provided in Debian's `whois`
-  package);
+  package; the password will not be set or changed if this parameter is not
+  set);
 - `force_password` (boolean) (default: `False`): whether or not the user's
   password should be set to `password`'s value even if the user was not newly
   created;
