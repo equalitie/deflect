@@ -33,7 +33,7 @@ represents a user and supports the following keys:
 - `force_password` (boolean) (default: `False`): whether or not the user's
   password should be set to `password`'s value even if the user was not newly
   created;
-- `pubkey` (string) (default: none): one or several SSH public keys, separated
+- `pubkey` (string) (mandatory): one or several SSH public keys, separated
   by new lines; SSH key not listed will be removed from user's `authorized_keys`
   file.
 
