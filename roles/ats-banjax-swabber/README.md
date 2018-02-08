@@ -18,7 +18,7 @@
 ## Input data
 
 - the versions to install of:
-    - ATS (default: 7.1.1);
+    - ATS (default: 7.1.2);
     - Banjax (default: 2.0.0);
     - swabber (default: 1.3.5);
 - for each of ATS, Banjax and swabber, one optional URL to fetch packaged
