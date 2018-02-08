@@ -25,3 +25,20 @@
     - libncurses5-dev
     - libcurl4-openssl-dev  
 
+- name: Retrieve Apache Traffic Server source archive
+  get_url:
+    url: "http://apache.cp.if.ua/trafficserver/trafficserver-{{ ats_version }}.tar.bz2"
+    checksum: "{{ ats_src_archive_checksum }}"
+    dest: "/tmp/ats-src-{{ ats_version }}.tar.bz2"
+
+- name: Create Apache Traffic Server build directory
+  file:
+    path: "/tmp/ats-src-{{ ats_version }}"
+    state: directory   
+
+- name: Unpack Apache Traffic Server source archive
+  unarchive:
+    remote_src: yes
+    src: "/tmp/ats-src-{{ ats_version }}.tar.bz2"
+    dest: "/tmp/ats-src-{{ ats_version }}"
+
