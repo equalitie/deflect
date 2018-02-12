@@ -8,3 +8,4 @@ ats_src_archive_checksum: "sha512:5f7e7cf72c94bb2829f2ef0c7632c71feba5ec5eb76256
 
 ats_groupname: trafficserver
 ats_username: trafficserver
+ats_install_path: /usr/local/trafficserver
