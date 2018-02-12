@@ -1,3 +1,14 @@
 ---
 
+- name: Install development package required to build Apache Traffic Server
+  apt:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - build-essential
+    - automake
+    - autoconf
+    - libtool
+    - flex
+    - bison
 
