@@ -56,3 +56,18 @@
     src: "/tmp/ats-src-{{ ats_version }}.tar.bz2"
     dest: "/tmp/ats-src-{{ ats_version }}"
 
+- name: Configure Apache Traffic Server source
+  command: "./configure --prefix={{ ats_install_path|quote }} --enable-layout=Apache --with-user={{ ats_username|quote }} --with-group={{ ats_groupname|quote }} --enable-experimental-plugins --with-ncurses --enable-wccp"
+  args:
+    chdir: "/tmp/ats-src-{{ ats_version }}/trafficserver-{{ ats_version }}/"
+
+- name: Compile Apache Traffic Server
+  command: make 
+  args:
+    chdir: "/tmp/ats-src-{{ ats_version }}/trafficserver-{{ ats_version }}/"
+
+- name: Install Apache Traffic Server
+  command: make install
+  args:
+    chdir: "/tmp/ats-src-{{ ats_version }}/trafficserver-{{ ats_version }}/"
+
