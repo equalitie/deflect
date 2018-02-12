@@ -1,5 +1,19 @@
 ---
 
+- name: Add Apache Traffic Server UNIX group
+  group:
+    name: "{{ ats_groupname }}"
+    state: present
+
+- name: Add Apache Traffic Server UNIX user
+  user:
+    name: "{{ ats_username }}"
+    group: "{{ ats_groupname }}"
+    shell: "/bin/false"
+    comment: "Apache Traffic Server"
+    createhome: no
+    state: present
+
 - name: Install development package required to build Apache Traffic Server
   apt:
     name: "{{item}}"
