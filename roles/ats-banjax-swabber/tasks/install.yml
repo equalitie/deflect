@@ -12,3 +12,16 @@
     - flex
     - bison
 
+- name: Install Apache Traffic Server header dependencies sources for building
+  apt:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - libssl-dev
+    - libhwloc-dev
+    - libcap-dev
+    - tcl-dev
+    - libpcre3-dev
+    - libncurses5-dev
+    - libcurl4-openssl-dev  
+
