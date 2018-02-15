@@ -116,3 +116,32 @@
     group: root
     mode: "0755"
 
+- name: Remove build packages
+  apt:
+    name: "{{item}}"
+    state: absent
+  with_items:
+    - build-essential
+    - automake
+    - autoconf
+    - libtool
+    - flex
+    - bison
+    - libssl-dev
+    - libhwloc-dev
+    - libcap-dev
+    - tcl-dev
+    - libpcre3-dev
+    - libncurses5-dev
+    - libcurl4-openssl-dev  
+    - git-core
+    - libyaml-cpp-dev
+    - libyaml-cpp0.5v5
+    - libre2-dev
+    - libzmq3-dev
+    - libboost-dev
+    - libboost-system-dev
+    - libboost-test-dev
+    - libconfig++-dev
+    - cmake
+
