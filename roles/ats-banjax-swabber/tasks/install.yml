@@ -116,6 +116,15 @@
     group: root
     mode: "0755"
 
+- name: Clean up build files of Apache Traffic Server and Banjax
+  file: 
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "/tmp/ats-src-{{ ats_version }}"
+    - "/tmp/ats-src-{{ ats_version }}.tar.bz2"
+    - "/tmp/banjax-src-{{ banjax_git_checkout }}"
+
 - name: Remove build packages
   apt:
     name: "{{item}}"
