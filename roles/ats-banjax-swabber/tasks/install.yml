@@ -81,3 +81,14 @@
   args:
     chdir: "/tmp/ats-src-{{ ats_version }}/trafficserver-{{ ats_version }}/"
 
+- name: Create Banjax build directory
+  file:
+    path: "/tmp/banjax-src-{{ banjax_git_checkout }}"
+    state: directory   
+
+- name: Retrieve Banjax source code in required version
+  git:
+    repo: "{{ banjax_repository }}"
+    dest: "/tmp/banjax-src-{{ banjax_git_checkout }}"
+    version: "{{ banjax_git_checkout }}"
+
