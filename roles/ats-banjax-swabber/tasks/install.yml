@@ -107,3 +107,12 @@
   args:
     chdir: "/tmp/banjax-src-{{ banjax_git_checkout }}/build"
 
+- name: Copy Banjax plugin into the Apache Traffic Server modules directory
+  copy:
+    remote_src: true
+    src: "/tmp/banjax-src-{{ banjax_git_checkout }}/build/banjax.so"
+    dest: "{{ ats_install_path }}/modules/banjax-{{ banjax_git_checkout }}.so"
+    owner: root
+    group: root
+    mode: "0755"
+
