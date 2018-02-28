@@ -38,6 +38,16 @@
     - libpcre3-dev
     - libncurses5-dev
     - libcurl4-openssl-dev  
+    - git-core
+    - libyaml-cpp-dev
+    - libyaml-cpp0.5v5
+    - libre2-dev
+    - libzmq3-dev
+    - libboost-dev
+    - libboost-system-dev
+    - libboost-test-dev
+    - libconfig++-dev
+    - cmake
 
 - name: Retrieve Apache Traffic Server source archive
   get_url:
