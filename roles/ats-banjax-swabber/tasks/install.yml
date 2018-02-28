@@ -92,3 +92,18 @@
     dest: "/tmp/banjax-src-{{ banjax_git_checkout }}"
     version: "{{ banjax_git_checkout }}"
 
+- name: Create build director in source repository
+  file:
+    path: "/tmp/banjax-src-{{ banjax_git_checkout }}/build"
+    state: directory
+
+- name: Run cmake in Banjax source directory
+  command: "cmake ../ -DCMAKE_CXX_FLAGS=\"-I{{ ats_install_path|quote }}/include\""
+  args:
+    chdir: "/tmp/banjax-src-{{ banjax_git_checkout }}/build"
+ 
+- name: Run make in Banjax source directory
+  command: make
+  args:
+    chdir: "/tmp/banjax-src-{{ banjax_git_checkout }}/build"
+
