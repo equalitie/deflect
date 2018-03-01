@@ -11,11 +11,13 @@
 
 - name: Add allowed users to SSH group
   user:
-    name: "{{ item }}"
+    name: "{{ item.login }}"
     groups: "{{ deflect_ssh_allow_group_name }}"
     state: present
     append: yes
-  with_items: "{{ ssh_logins_flatlist }}"
+    password: "{{ item.password | default('') }}"
+    update_password: on_create
+  with_items: "{{ deflect_ssh_users }}"
 
 - name: Fetch SSH group configuration
   getent:
@@ -35,6 +37,15 @@
     sudo_logins_flatlist: "{{ sudo_logins_flatlist|default([]) + [item.login] }}"
   with_items: "{{ deflect_ssh_users }}"
   when: "item.sudo | default(False)"
+
+- name: Set up SSH public keys for users
+  authorized_key:
+    user: "{{ item.login }}"
+    key: "{{ item.pubkey }}"
+    state: present
+    exclusive: yes
+    manage_dir: yes
+  with_items: "{{ deflect_ssh_users }}"
 
 - name: Add allowed users to sudo group
   user:
@@ -66,3 +77,13 @@
     group: root
     mode: "0644"
   notify: ["restart sshd"]
+
+- name: Force password update for users where it is specified to do so
+  user:
+    name: "{{ item.login }}"
+    state: present
+    password: "{{ item.password }}"
+    update_password: always
+  with_items: "{{ deflect_ssh_users }}"
+  when: "item.password is defined and item.force_password is defined and item.force_password == True"
+   
