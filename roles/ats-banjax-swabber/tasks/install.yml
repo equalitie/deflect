@@ -134,6 +134,17 @@
     dest: "/tmp/swabber-src-{{ swabber_git_checkout }}"
     version: "{{ swabber_git_checkout }}"
 
+- name: Create workaround symbolic link for python-iptables bug
+  file:
+    src: "/usr/lib/python2.7/dist-packages/libxtwrapper.x86_64-linux-gnu.so"
+    dest: "/usr/lib/python2.7/dist-packages/libxtwrapper.so"
+    state: link
+
+- name: Install Swabber
+  command: python setup.py install
+  args:
+    chdir: "/tmp/swabber-src-{{ swabber_git_checkout }}/src"
+
 - name: Clean up build files of Apache Traffic Server and Banjax
   file: 
     path: "{{ item }}"
