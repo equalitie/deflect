@@ -116,6 +116,12 @@
     group: root
     mode: "0755"
 
+- name: Retrieve Swabber source tree in required version
+  git:
+    repo: "{{ swabber_repository }}"
+    dest: "/tmp/swabber-src-{{ swabber_git_checkout }}"
+    version: "{{ swabber_git_checkout }}"
+
 - name: Clean up build files of Apache Traffic Server and Banjax
   file: 
     path: "{{ item }}"
