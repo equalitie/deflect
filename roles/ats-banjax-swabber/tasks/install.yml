@@ -151,7 +151,7 @@
     src: "/tmp/swabber-src-{{ swabber_git_checkout }}/initscript/swabberd.service"
     dest: "/lib/systemd/system/swabber.service"
 
-- name: Clean up build files of Apache Traffic Server and Banjax
+- name: Clean up build files of Apache Traffic Server, Banjax and Swabber
   file: 
     path: "{{ item }}"
     state: absent
@@ -159,6 +159,7 @@
     - "/tmp/ats-src-{{ ats_version }}"
     - "/tmp/ats-src-{{ ats_version }}.tar.bz2"
     - "/tmp/banjax-src-{{ banjax_git_checkout }}"
+    - "/tmp/swabber-src-{{ swabber_git_checkout }}"
 
 - name: Remove build packages
   apt:
