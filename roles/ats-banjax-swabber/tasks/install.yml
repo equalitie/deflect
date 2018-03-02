@@ -145,6 +145,12 @@
   args:
     chdir: "/tmp/swabber-src-{{ swabber_git_checkout }}/src"
 
+- name: Copy SystemD service unit file
+  copy:
+    remote_src: true
+    src: "/tmp/swabber-src-{{ swabber_git_checkout }}/initscript/swabberd.service"
+    dest: "/lib/systemd/system/swabber.service"
+
 - name: Clean up build files of Apache Traffic Server and Banjax
   file: 
     path: "{{ item }}"
