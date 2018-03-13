@@ -1,0 +1,192 @@
+---
+
+- name: Add Apache Traffic Server UNIX group
+  group:
+    name: "{{ ats_groupname }}"
+    state: present
+
+- name: Add Apache Traffic Server UNIX user
+  user:
+    name: "{{ ats_username }}"
+    group: "{{ ats_groupname }}"
+    shell: "/bin/false"
+    comment: "Apache Traffic Server"
+    createhome: no
+    state: present
+
+- name: Install development package required to build Apache Traffic Server
+  apt:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - build-essential
+    - automake
+    - autoconf
+    - libtool
+    - flex
+    - bison
+
+- name: Install Apache Traffic Server and Banjax header dependencies sources for building
+  apt:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - libssl-dev
+    - libhwloc-dev
+    - libcap-dev
+    - tcl-dev
+    - libpcre3-dev
+    - libncurses5-dev
+    - libcurl4-openssl-dev  
+    - git-core
+    - libyaml-cpp-dev
+    - libyaml-cpp0.5v5
+    - libre2-dev
+    - libzmq3-dev
+    - libboost-dev
+    - libboost-system-dev
+    - libboost-test-dev
+    - libconfig++-dev
+    - cmake
+
+- name: Install Swabber Debian package dependencies
+  apt:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - iptables
+    - python-iptables
+    - python-zmq
+    - python-yaml
+    - python-ipaddr
+    - python-setuptools
+
+- name: Retrieve Apache Traffic Server source archive
+  get_url:
+    url: "http://apache.cp.if.ua/trafficserver/trafficserver-{{ ats_version }}.tar.bz2"
+    checksum: "{{ ats_src_archive_checksum }}"
+    dest: "/tmp/ats-src-{{ ats_version }}.tar.bz2"
+
+- name: Create Apache Traffic Server build directory
+  file:
+    path: "/tmp/ats-src-{{ ats_version }}"
+    state: directory   
+
+- name: Unpack Apache Traffic Server source archive
+  unarchive:
+    remote_src: yes
+    src: "/tmp/ats-src-{{ ats_version }}.tar.bz2"
+    dest: "/tmp/ats-src-{{ ats_version }}"
+
+- name: Configure Apache Traffic Server source
+  command: "./configure --prefix={{ ats_install_path|quote }} --enable-layout=Apache --with-user={{ ats_username|quote }} --with-group={{ ats_groupname|quote }} --enable-experimental-plugins --with-ncurses --enable-wccp"
+  args:
+    chdir: "/tmp/ats-src-{{ ats_version }}/trafficserver-{{ ats_version }}/"
+
+- name: Compile Apache Traffic Server
+  command: make 
+  args:
+    chdir: "/tmp/ats-src-{{ ats_version }}/trafficserver-{{ ats_version }}/"
+
+- name: Install Apache Traffic Server
+  command: make install
+  args:
+    chdir: "/tmp/ats-src-{{ ats_version }}/trafficserver-{{ ats_version }}/"
+
+- name: Create Banjax build directory
+  file:
+    path: "/tmp/banjax-src-{{ banjax_git_checkout }}"
+    state: directory   
+
+- name: Retrieve Banjax source code in required version
+  git:
+    repo: "{{ banjax_repository }}"
+    dest: "/tmp/banjax-src-{{ banjax_git_checkout }}"
+    version: "{{ banjax_git_checkout }}"
+
+- name: Create build director in source repository
+  file:
+    path: "/tmp/banjax-src-{{ banjax_git_checkout }}/build"
+    state: directory
+
+- name: Run cmake in Banjax source directory
+  command: "cmake ../ -DCMAKE_CXX_FLAGS=\"-I{{ ats_install_path|quote }}/include\""
+  args:
+    chdir: "/tmp/banjax-src-{{ banjax_git_checkout }}/build"
+ 
+- name: Run make in Banjax source directory
+  command: make
+  args:
+    chdir: "/tmp/banjax-src-{{ banjax_git_checkout }}/build"
+
+- name: Copy Banjax plugin into the Apache Traffic Server modules directory
+  copy:
+    remote_src: true
+    src: "/tmp/banjax-src-{{ banjax_git_checkout }}/build/banjax.so"
+    dest: "{{ ats_install_path }}/modules/banjax-{{ banjax_git_checkout }}.so"
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Retrieve Swabber source tree in required version
+  git:
+    repo: "{{ swabber_repository }}"
+    dest: "/tmp/swabber-src-{{ swabber_git_checkout }}"
+    version: "{{ swabber_git_checkout }}"
+
+- name: Create workaround symbolic link for python-iptables bug
+  file:
+    src: "/usr/lib/python2.7/dist-packages/libxtwrapper.x86_64-linux-gnu.so"
+    dest: "/usr/lib/python2.7/dist-packages/libxtwrapper.so"
+    state: link
+
+- name: Install Swabber
+  command: python setup.py install
+  args:
+    chdir: "/tmp/swabber-src-{{ swabber_git_checkout }}/src"
+
+- name: Copy SystemD service unit file
+  copy:
+    remote_src: true
+    src: "/tmp/swabber-src-{{ swabber_git_checkout }}/initscript/swabberd.service"
+    dest: "/lib/systemd/system/swabber.service"
+
+- name: Clean up build files of Apache Traffic Server, Banjax and Swabber
+  file: 
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "/tmp/ats-src-{{ ats_version }}"
+    - "/tmp/ats-src-{{ ats_version }}.tar.bz2"
+    - "/tmp/banjax-src-{{ banjax_git_checkout }}"
+    - "/tmp/swabber-src-{{ swabber_git_checkout }}"
+
+- name: Remove build packages
+  apt:
+    name: "{{item}}"
+    state: absent
+  with_items:
+    - build-essential
+    - automake
+    - autoconf
+    - libtool
+    - flex
+    - bison
+    - libssl-dev
+    - libhwloc-dev
+    - libcap-dev
+    - tcl-dev
+    - libpcre3-dev
+    - libncurses5-dev
+    - libcurl4-openssl-dev  
+    - git-core
+    - libyaml-cpp-dev
+    - libyaml-cpp0.5v5
+    - libre2-dev
+    - libzmq3-dev
+    - libboost-dev
+    - libboost-system-dev
+    - libboost-test-dev
+    - libconfig++-dev
+    - cmake
+
