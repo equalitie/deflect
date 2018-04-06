@@ -16,9 +16,55 @@
 
 ## Input data
 
-- the TCP port(s) the SSH server listens on (default: only port 22);
-- a list of allowed SSH logins (default: only the user used as Ansible login);
-- a list of logins allowed to use `sudo` (default: only the user used as Ansible
-  login);
-- an encrypted login password for each user (default: no password is set if not
-  specified).
+### Required
+
+##### `deflect_ssh_users`
+
+List of users allowed to SSH into the target system. Each item of the list
+represents a user and supports the following keys:
+
+- `login` (string) (mandatory): the user's login on the system;
+- `sudo` (boolean) (default: `False`): whether or not the user has `sudo`
+  access;
+- `password` (string): encrypted UNIX password for the user, following the
+  `/etc/shadow` format (see the `mkpasswd` tool provided in Debian's `whois`
+  package; the password will not be set or changed if this parameter is not
+  set);
+- `force_password` (boolean) (default: `False`): whether or not the user's
+  password should be set to `password`'s value even if the user was not newly
+  created;
+- `pubkey` (string) (mandatory): one or several SSH public keys, separated
+  by new lines; SSH key not listed will be removed from user's `authorized_keys`
+  file.
+
+Example:
+
+```
+deflect_ssh_users:
+  - login: bob
+    sudo: True
+    password: $6$TYZFllHTbDCBn$Lph3t5eaaM3YTcqKeowf38z5BOxYVgK.a9nrkpaozmDXymX934o/NpGY1WI1wjfbgrPK0keFxPRun93FbdSi81
+    pubkey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDEYa5C/1gMUTM9x4MnhhPW1UttT8VFL3/eMxDD6UuPy0MoREdjShdd6v+sA3ivOx8OAu5wt9mgBXcnl6LYaLw9ivPQ6vN3wrFD3eHVsJnRyl6YW4nn9ADeNH+jI96OF7nyUg2D2tEdG+v2BW74hhUePEefZsJV7MfhHB49bynJrpegV0lPeamczddhtMgorgbSyLodqs8TO4o+xvjJPFPD3CriCq38tmBZ02XWq/H8ac/13pwNsQdHTjHGt5fO7YJXoz5KBRUXDvHkf435AMBGc1jCx8PGn4jMcY1vfnlhWoU8/E84kxgykcsTAK16fuaCqJVlFJ/rhiinYqphtBfT
+  - login: someone_with_several_keys
+    pubkey: |
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCzszUbgx0wq52iPVOJW//qRGCALW1mUcXdGzPCMcM619slLp2YoKLg0OpurGJHeTN7pbQ/RdrUaJct/TzrLL1fK/HdaSscZV877gjGDpm8Q7ereVn2l6UQivdmUd5Lr3DvJegPTKIbRuY9LDlPk7d4Iu7sxN5dbvshyLM+7LWXfCytt7o/3+rdaLcE/IP7Q168sToax1lZex/KZpNXqGhugMIr3Igj2blWBXkM25qDxP7KdaxKpUUsad9hJ1zZx3nD55Lq9XuWD6/JXcbbo1KXHsojHdwBFwvIInQv0H487QkMI8CMILPCSKfuNkXdZa8cqzc6AujusigMGy1/Hnh3
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCg5FKGJg7oTqG2g7PNoCCLu6u0ifSXHT4WOjmiVToZu0WANbQBVGXQhfzKosVvCYzioAt/K38Z6LMqf+fRQ3rqXJhYNWsXRtogyO5BJNMmggmZYr2jXZJnmkVxlBaf2YRFUZICNkUlct6hq23nUJgZU/l1/+oCwfhSjKGr/yQ0tPmx1UG4RIwCpg0FvoSHwDQ7D0pnLLtfw0QTH+0QFTTKnmL5HSeCwZlR9/qXo/Fb7ro3bdiipTt8Otug6zs4Y2ydtMZlyDu8JkMz/2kA3k3oyD4YrDZ977AdU/9cTwrmtOTNlZqenb4IZlxWsMwsWRPSil76QB+qldXLPAGk7vcn
+```
+
+### Recommended
+
+None.
+
+### Optional
+
+#### `deflect_ssh_allow_group_name` (string)
+
+UNIX group name that will contain the users allowed to SSH into the system.
+
+Default: `deflect-ssh`
+
+#### `ssh_listen_ports` (list of integers)
+
+List of TCP ports the OpenSSH daemon will listen on.
+
+Default: only port 22.
