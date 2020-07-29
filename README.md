@@ -7,6 +7,12 @@ Among many improvements, this  major revision will also include a new Core API. 
 
 This repository will serve as the Deflect City Hall which is a collection of ansible scripts that will build a Deflect infrastructure on your own hardware. 
 
+The main Deflect Core components are the following:
+- Deflect City Hall (this repo)
+- Core API (A RESTful web API using JSON)
+- Edgemanage (Built in Python and used to manage edges in your network)
+- Banjax (Central component that cerves challenges to traffic or bans malicious traffic)
+
 ## Purpose
 [Distributed Denial of Service (DDoS)](https://en.wikipedia.org/wiki/Denial-of-service_attack#Distributed_attack "Distributed Denial of Service (DDoS)") has become a cheap and common way to shut down legitimate voices. Deflect tries to tilt the balance back in favour of freedom of expression.
 
