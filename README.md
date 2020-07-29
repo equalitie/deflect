@@ -1,4 +1,12 @@
 # Deflect
+
+## Major Code Refactoring Inititative in 2020
+For 2020, Deflect is spending a large amount of time and resources on refactoring its core offering for the opensource community. This major revision will include a more streamlined installation and management process for the Deflect instrastrcuture. 
+
+Among many improvements, this  major revision will also include a new Core API. The RESTful API will allow devops and sysops to manage and build ontop of the Deflect Infrastrcuture using a common interface. The Core API also allows you to integrated Deflect functionality in your existing administrative dashboards.
+
+This repository will serve as the Deflect City Hall which is a collection of ansible scripts that will build a Deflect infrastructure on your own hardware. 
+
 ## Purpose
 [Distributed Denial of Service (DDoS)](https://en.wikipedia.org/wiki/Denial-of-service_attack#Distributed_attack "Distributed Denial of Service (DDoS)") has become a cheap and common way to shut down legitimate voices. Deflect tries to tilt the balance back in favour of freedom of expression.
 
@@ -8,9 +16,6 @@ Deflect aims at making it easier to set up an infrastructure capable to absorb l
 
 ## Who is it for?
 Civil society organisations wanting to defend their and their partners' web sites at reasonable cost, with trustworthy software and while safeguarding privacy. Many organisations have emphasised the importance not to sacrifice privacy for DDoS protection. By running your own Deflect, there will be no third-party middleman to your web traffic.
-
-Deflect integrates a user-friendly web-based dashboard for both users and system administrators. It therefore makes it easier to set up a commercial, user-oriented DDoS protection service.
-
 
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
