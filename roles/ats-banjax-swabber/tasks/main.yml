@@ -1,5 +1,0 @@
----
-
-- import_tasks: install.yml
-  tags: ["ats-banjax-swabber", "install", "install_ats-banjax-swabber"]
-
