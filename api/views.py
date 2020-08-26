@@ -5,6 +5,7 @@ from django.conf import settings
 from django.shortcuts import render
 from django.http import JsonResponse
 
+from .modules.edgemanage import edge_query
 
 def index(request):
     return JsonResponse({
@@ -15,3 +16,7 @@ def index(request):
             'python': sys.version
         }
     })
+
+
+def api_edge_query(request):
+    return JsonResponse(edge_query(), safe=False)
