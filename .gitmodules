@@ -1,0 +1,4 @@
+[submodule "edgemanage3"]
+	path = edgemanage3
+	url = https://github.com/equalitie/edgemanage.git
+	branch = feature/python3-migration
