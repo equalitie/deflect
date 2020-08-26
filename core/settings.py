@@ -10,7 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import environ
+
 from pathlib import Path
+
+env = environ.Env(
+    ALLOWED_HOSTS=(list, [])
+)
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -20,17 +27,18 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'au6s@qmmx_omkv!x#1d_c5v!d&6bgz8=(_ct!djj1@g&ub)4=m'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG', default=False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'api.apps.ApiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -120,4 +128,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Custom
-APP_NAME = 'deflect-core'
+APP_NAME = env('APP_NAME', default='deflect-core')
+EDGEMANAGE_CONFIG = env('EDGEMANAGE_CONFIG')
+EDGEMANAGE_DNET = env('EDGEMANAGE_DNET')
