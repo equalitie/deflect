@@ -35,10 +35,13 @@ def edge_query(dnet=None):
         else:
             state_time = -1
 
-        output_data.append((edge_state.mode, edge_state.state,
-                            edge_state.health,
-                            edge_state.edgename,
-                            str(state_time),
-                            None if edge_state.comment == "" else edge_state.comment))
+        output_data.append({
+            'edgename': edge_state.edgename,
+            'mode': edge_state.mode,
+            'state':  edge_state.state,
+            'health': edge_state.health,
+            'state_time': state_time,
+            'comment': None if edge_state.comment == "" else edge_state.comment
+        })
 
     return output_data
