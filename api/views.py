@@ -4,8 +4,9 @@ import sys
 from django.conf import settings
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
-from .modules.edgemanage import edge_query
+from .modules.edgemanage import edge_query, edge_conf
 
 def index(request):
     return JsonResponse({
@@ -20,3 +21,14 @@ def index(request):
 
 def api_edge_query(request):
     return JsonResponse(edge_query(), safe=False)
+
+
+@csrf_exempt
+def api_edge_conf(request):
+    return JsonResponse(edge_conf(
+        request.POST['dnet'],
+        request.POST['edge'],
+        request.POST['mode'],
+        request.POST['comment'],
+        request.POST['comment_user']
+    ), safe=False)

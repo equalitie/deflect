@@ -65,9 +65,8 @@ def edge_conf(dnet, edge, mode, comment, comment_user, no_syslog=False):
       settings.EDGEMANAGE_CONFIG, dnet or settings.EDGEMANAGE_DNET)
 
     # create lock file
-    lock, lock_err = edgemanage_adapter.lock_edge_conf()
-    if not lock:
-        raise Exception(lock_err)
+    if not edgemanage_adapter.lock_edge_conf():
+        raise Exception("Couldn't acquire edge_conf lockfile")
 
     if edge not in edgemanage_adapter.edge_list:
         raise KeyError("Edge %s is not in the edge list of %s" %
@@ -85,6 +84,11 @@ def edge_conf(dnet, edge, mode, comment, comment_user, no_syslog=False):
         raise Exception("failed to load state for edge %s: %s" %
                         (edge, str(e)))
 
+    prev_state = {
+        'mode': edge_state.mode,
+        'comment': None if edge_state.comment == "" else edge_state.comment
+    }
+
     edge_state.set_mode(mode)
 
     if comment:
@@ -101,3 +105,13 @@ def edge_conf(dnet, edge, mode, comment, comment_user, no_syslog=False):
 
     # release lock
     edgemanage_adapter.unlock_edge_conf()
+
+    # "Set mode for %s to %s" % (edgename, mode)
+    return {
+        'edge': edge,
+        'prev_state': prev_state,
+        'current_state': {
+            'mode': mode,
+            'comment': comment
+        }
+    }
