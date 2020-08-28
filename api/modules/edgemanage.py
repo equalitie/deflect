@@ -7,7 +7,9 @@ from edgemanage3.edgemanage.adapter import EdgemanageAdapter
 from edgemanage3.edgemanage import EdgeState
 
 import time
+import logging
 
+logger = logging.getLogger(__name__)
 
 def edge_query(dnet=None):
     """
@@ -17,9 +19,16 @@ def edge_query(dnet=None):
     - edge_query --dnet mynet --config ../edgemanage_test/edgemanage.yaml -v
     """
 
-    edgemanage_adapter = EdgemanageAdapter(
-      settings.EDGEMANAGE_CONFIG, dnet or settings.EDGEMANAGE_DNET)
     output_data = []
+
+    try:
+        edgemanage_adapter = EdgemanageAdapter(
+            settings.EDGEMANAGE_CONFIG, dnet or settings.EDGEMANAGE_DNET)
+    except FileNotFoundError:
+        # dnet does not exist
+        logger.debug('edge_query: dnet %s not found' % dnet)
+        return output_data
+
     now = time.time()
 
     for edge in edgemanage_adapter.edge_list:

@@ -131,3 +131,17 @@ STATIC_URL = '/static/'
 APP_NAME = env('APP_NAME', default='deflect-core')
 EDGEMANAGE_CONFIG = env('EDGEMANAGE_CONFIG')
 EDGEMANAGE_DNET = env('EDGEMANAGE_DNET')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}

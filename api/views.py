@@ -19,8 +19,8 @@ def index(request):
     })
 
 
-def api_edge_query(request):
-    return JsonResponse(edge_query(), safe=False)
+def api_edge_query(request, dnet):
+    return JsonResponse(edge_query(dnet), safe=False)
 
 
 @csrf_exempt
