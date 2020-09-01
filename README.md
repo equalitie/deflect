@@ -1,11 +1,13 @@
 # Deflect Core
 
+This project serves as the core of Deflect, several componenet is integrated within this project including edgemanage, Deflect website DNS/options, gen_site_config and autodeflect.
+
 ## Versions
 
 1. Python 3.6.10
 2. Django 3.1
 
-## Install
+## Install (dev)
 
 ```
 python -m venv venv
@@ -18,7 +20,27 @@ cd edgemanage3
 python setup.py install
 ```
 
-## API Implementation Tracker
+## Post-install
+
+After executing `python setup.py install` for edgemanage, there will be 3 binary installed
+
+- edge_manage
+- edge_query
+- edge_conf
+
+Directly executing these command should work as usual, but **an edgemanage config yaml is required** before running such command
+
+1. `cp dev/edgemanage/edgemanage.example.yaml dev/edgemanage/edgemanage.yaml`
+2. Edit `edgemanage.yaml`, replace `<abs_path>` with absolute path of this project directory (without trailing `/`)
+3. Create `dev/edgemanage/edges/dev` and insert edges hostname, line by line
+
+Execute commands to ensure edgemanage is installed correctly
+
+- `edge_manage --dnet dev --config dev/edgemanage/edgemanage.yaml -v`
+- `edge_conf --dnet dev --config dev/edgemanage/edgemanage.yaml --mode unavailable --comment "out" {edge_hostname}`
+- `edge_query --dnet dev --config dev/edgemanage/edgemanage.yaml -v`
+
+## API Implementation
 
 ### GET /api/edgemanage/<str:dnet>
 

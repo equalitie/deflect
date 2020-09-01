@@ -114,3 +114,13 @@ media/
 # **/migrations/**
 # !**/migrations
 # !**/migrations/__init__.py
+
+# Ignore generated file in dev/edgemanage
+dev/edgemanage/edgemanage.yaml
+dev/edgemanage/bind/*.zone
+dev/edgemanage/health/*.edgestore
+dev/edgemanage/lock/*.lock
+dev/edgemanage/state/*.state
+dev/edgemanage/tmp/*.live
+dev/edgemanage/edges/*
+!dev/edgemanage/edges/.gitkeep
