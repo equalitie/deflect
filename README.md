@@ -6,18 +6,23 @@ This project serves as the core of Deflect, several componenet is integrated wit
 
 1. Python 3.6.10
 2. Django 3.1
+3. Django REST framework 3.11.1
 
 ## Install (dev)
 
 ```
 python -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt
 
-# Init submodule edgemanage
+# Init submodule edgemanage before pip
 git submodule update --init
 cd edgemanage3
 python setup.py install
+cd ..
+pip install -r requirements.txt
+
+# Create super user for django
+python manage.py createsuperuser --email admin@example.com --username admin
 ```
 
 ## Post-install
@@ -39,6 +44,10 @@ Execute commands to ensure edgemanage is installed correctly
 - `edge_manage --dnet dev --config dev/edgemanage/edgemanage.yaml -v`
 - `edge_conf --dnet dev --config dev/edgemanage/edgemanage.yaml --mode unavailable --comment "out" {edge_hostname}`
 - `edge_query --dnet dev --config dev/edgemanage/edgemanage.yaml -v`
+
+## Django Admin
+
+Built in admin interface can be accessed via [http://localhost:8000/admin](http://localhost:8000/admin)
 
 ## API Implementation
 
