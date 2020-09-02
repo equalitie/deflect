@@ -47,11 +47,15 @@ Execute commands to ensure edgemanage is installed correctly
 
 ## Django Admin
 
-Built in admin interface can be accessed via [http://localhost:8000/admin](http://localhost:8000/admin)
+Built-in admin interface can be accessed via [http://localhost:8000/admin](http://localhost:8000/admin)
+
+## REST framework GUI
+
+REST framework provides built-in GUI for API testing, auth is required by clicking "Log in" on the top right corner when accessed via [http://localhost:8000/api](http://localhost:8000/api)
 
 ## API Implementation
 
-### GET /api/edgemanage/<str:dnet>
+### GET `/api/edgemanage/<str:dnet>`
 
 Equivalent to command `edge_query --dnet dnet1`
 
@@ -70,7 +74,7 @@ Equivalent to command `edge_query --dnet dnet1`
 ]
 ```
 
-### POST /api/edgemanage
+### POST `/api/edgemanage`
 
 #### Param
 
