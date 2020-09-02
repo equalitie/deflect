@@ -25,9 +25,7 @@ def edge_query(dnet=None):
         edgemanage_adapter = EdgemanageAdapter(
             settings.EDGEMANAGE_CONFIG, dnet or settings.EDGEMANAGE_DNET)
     except FileNotFoundError:
-        # dnet does not exist
-        logger.debug('edge_query: dnet %s not found' % dnet)
-        return output_data
+        raise KeyError('edge_query: dnet %s not found' % dnet)
 
     now = time.time()
 
@@ -39,7 +37,7 @@ def edge_query(dnet=None):
             edge_state = EdgeState(edge, edgemanage_adapter.get_config("healthdata_store"),
                                    nowrite=True)
         except Exception as e:
-            return "failed to load state for edge %s: %s\n" % (edge, str(e))
+            raise Exception("failed to load state for edge %s: %s\n" % (edge, str(e)))
 
         if edge_state.state_entry_time:
             state_time = int(now - edge_state.state_entry_time)
@@ -70,8 +68,11 @@ def edge_conf(dnet, edge, mode, comment, comment_user, no_syslog=False):
         --comment "out"
         lime20.prod.deflect.ca
     """
-    edgemanage_adapter = EdgemanageAdapter(
-      settings.EDGEMANAGE_CONFIG, dnet or settings.EDGEMANAGE_DNET)
+    try:
+        edgemanage_adapter = EdgemanageAdapter(
+            settings.EDGEMANAGE_CONFIG, dnet or settings.EDGEMANAGE_DNET)
+    except FileNotFoundError:
+        raise KeyError('edge_query: dnet %s not found' % dnet)
 
     # create lock file
     if not edgemanage_adapter.lock_edge_conf():
