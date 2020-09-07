@@ -1,13 +1,12 @@
 """
 Middleware between API view and EdgemanageAdapter
 """
+import time
+import logging
 
 from django.conf import settings
 from edgemanage3.edgemanage.adapter import EdgemanageAdapter
 from edgemanage3.edgemanage import EdgeState
-
-import time
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -25,7 +24,7 @@ def edge_query(dnet=None):
         edgemanage_adapter = EdgemanageAdapter(
             settings.EDGEMANAGE_CONFIG, dnet or settings.EDGEMANAGE_DNET)
     except FileNotFoundError:
-        raise KeyError('edge_query: dnet %s not found' % dnet)
+        raise KeyError('edge_query: dnet %s not found' % dnet) from FileNotFoundError
 
     now = time.time()
 
@@ -36,8 +35,8 @@ def edge_query(dnet=None):
         try:
             edge_state = EdgeState(edge, edgemanage_adapter.get_config("healthdata_store"),
                                    nowrite=True)
-        except Exception as e:
-            raise Exception("failed to load state for edge %s: %s\n" % (edge, str(e)))
+        except Exception as err:
+            raise Exception("failed to load state for edge %s: %s\n" % (edge, str(err)))
 
         if edge_state.state_entry_time:
             state_time = int(now - edge_state.state_entry_time)
@@ -72,7 +71,7 @@ def edge_conf(dnet, edge, mode, comment, comment_user, no_syslog=False):
         edgemanage_adapter = EdgemanageAdapter(
             settings.EDGEMANAGE_CONFIG, dnet or settings.EDGEMANAGE_DNET)
     except FileNotFoundError:
-        raise KeyError('edge_query: dnet %s not found' % dnet)
+        raise KeyError('edge_query: dnet %s not found' % dnet) from FileNotFoundError
 
     # create lock file
     if not edgemanage_adapter.lock_edge_conf():
@@ -90,9 +89,9 @@ def edge_conf(dnet, edge, mode, comment, comment_user, no_syslog=False):
         edge_state = EdgeState(edge,
                                edgemanage_adapter.config["healthdata_store"],
                                nowrite=False)
-    except Exception as e:
+    except Exception as err:
         raise Exception("failed to load state for edge %s: %s" %
-                        (edge, str(e)))
+                        (edge, str(err)))
 
     prev_state = {
         'mode': edge_state.mode,
