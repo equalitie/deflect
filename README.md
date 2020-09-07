@@ -111,3 +111,7 @@ Equivalent to command `edge_query --dnet dnet1`
     }
 }
 ```
+
+## Tests
+
+    python test.py
