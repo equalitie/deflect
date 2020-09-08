@@ -9,7 +9,6 @@ Django==3.1
 django-environ==0.4.5
 django-filter==2.3.0
 djangorestframework==3.11.1
-edgemanage==2.1.2
 idna==2.10
 importlib-metadata==1.7.0
 ipaddr==2.2.0
