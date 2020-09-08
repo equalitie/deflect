@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/equalitie/deflect-core
+    parallelism: 1
+    docker:
+      - image: circleci/python:3.6
+    steps:
+      - checkout
+      - run: sudo apt-get update -qy
+      - run: sudo apt-get install -y python-dev python-pip
+      - run: pip install -r requirements.txt
+      - run: python test.py
