@@ -21,9 +21,9 @@ def api_info(request):
 
 
 @api_view(['GET'])
-def api_edge_query(request, dnet):
+def api_edge_query(request):
     try:
-        return Response(edge_query(dnet))
+        return Response(edge_query(request.GET['dnet']))
     except KeyError as err:
         return Response({"error": str(err)}, status=status.HTTP_404_NOT_FOUND)
     except Exception as err:
