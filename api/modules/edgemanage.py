@@ -124,3 +124,17 @@ def edge_conf(dnet, edge, mode, comment, comment_user, no_syslog=False):
             'comment': comment
         }
     }
+
+
+def dnet_query():
+    """
+    List all available dnet
+    """
+    try:
+        edgemanage_adapter = EdgemanageAdapter(
+            settings.EDGEMANAGE_CONFIG, None)
+        dnets = edgemanage_adapter.dnet_query()
+    except FileNotFoundError:
+        raise FileNotFoundError('dnet_query: edgemanage error')
+
+    return dnets

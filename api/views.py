@@ -6,7 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.conf import settings
 
-from .modules.edgemanage import edge_query, edge_conf
+from .modules.edgemanage import edge_query, edge_conf, dnet_query
 
 @api_view(['GET'])
 def api_info(request):
@@ -27,6 +27,14 @@ def api_edge_query(request):
     except KeyError as err:
         return Response({"error": str(err)}, status=status.HTTP_404_NOT_FOUND)
     except Exception as err:
+        return Response({"error": str(err)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['GET'])
+def api_dnet_query(request):
+    try:
+        return Response(dnet_query())
+    except FileNotFoundError as err:
         return Response({"error": str(err)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 

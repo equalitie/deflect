@@ -90,6 +90,21 @@ Equivalent to command `edge_query --dnet dnet1`
 ]
 ```
 
+### POST `/api/edge/dnet`
+
+List all available dnet
+
+#### Sample output
+
+```
+[
+    'dnet1',
+    'dnet2',
+    'dnet3'
+]
+```
+
+
 ### POST `/api/edge/config`
 
 #### Param
