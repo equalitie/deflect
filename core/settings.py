@@ -11,12 +11,16 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 from pathlib import Path
 
+import os
 import environ
 
 env = environ.Env(
     ALLOWED_HOSTS=(list, [])
 )
-environ.Env.read_env()
+ENV_PATH = None
+if 'ENV_PATH' in os.environ:
+    ENV_PATH = os.environ['ENV_PATH']
+environ.Env.read_env(env_file=ENV_PATH)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
