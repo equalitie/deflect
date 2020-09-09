@@ -14,8 +14,8 @@ testobject:
   # Path to the object to be retrieved
   uri: /deflectlogo_RED.png
   # Local copy of the object that we'll be fetching.
-  # workdir ~/deflect-core/ defined in circleci config
-  local: ~/deflect-core/tests/edgemanage/object.edgemanage
+  # workdir /opt/deflect-core/ defined in circleci config
+  local: /home/circleci/deflect-core/tests/edgemanage/object.edgemanage
   # Verify SSL certificates? Will cause spammy logging on some
   # platforms.
   verify: False
@@ -37,14 +37,14 @@ dns:
 run_frequency: 60
 
 # Where health data for individual edges is stored
-healthdata_store: ~/deflect-core/tests/edgemanage/health
+healthdata_store: /home/circleci/deflect-core/tests/edgemanage/health
 
 # Directory containing lists of edges (hosts to be queried), divided
 # by network (the name passed to the -A flag). If you have two
 # networks, net_a and net_b, there would be two files named for each
 # network. These networks will be queried depending on which flag is
 # passed to the edgemanage command.
-edgelist_dir: ~/deflect-core/tests/edgemanage/edges
+edgelist_dir: /home/circleci/deflect-core/tests/edgemanage/edges
 
 # This setting defines the maximum number of substitutions that can be
 # performed in a 10 minute period
@@ -71,18 +71,18 @@ canary_killer: 6
 
 # A file used to maintain state, details about last rotation and the
 # previously in-use edges. This path can and should contain {dnet}
-statefile: ~/deflect-core/tests/edgemanage/state/{dnet}.state
+statefile: /home/circleci/deflect-core/tests/edgemanage/state/{dnet}.state
 
 # The file that edgemanage should log to
-logpath: ~/deflect-core/tests/edgemanage/log/edgemanage.log
+logpath: /home/circleci/deflect-core/tests/edgemanage/log/edgemanage.log
 # A simple lockfile to prevent concurrent execution
-lockfile: ~/deflect-core/tests/edgemanage/lock/edgemanage.lock
+lockfile: /home/circleci/deflect-core/tests/edgemanage/lock/edgemanage.lock
 
 # A directory containing directories containing files named
 # deflect.ca.zone, nosmo.me.zone and so on. Used for insertion into
 # completed zone files after edges have been decided upon. Stick your
 # MX, CNAME and non-@ A records into these files.
-zonetemplate_dir: ~/deflect-core/tests/edgemanage/zones
+zonetemplate_dir: /home/circleci/deflect-core/tests/edgemanage/zones
 
 # Number of edges to keep as the @ record in DNS - if not specific in
 # dnet_edge_count, this value will be used.
@@ -95,11 +95,11 @@ dnet_edge_count:
 # Directory to write completed, full DNS zone files to. If you're
 # using Edgemanage in a live capacity, this should be the directory
 # that your bind instance reads zone files from
-named_dir: ~/deflect-core/tests/edgemanage/bind/
+named_dir: /home/circleci/deflect-core/tests/edgemanage/bind/
 
 # File to output list of live edges to - the path may (and should!)
 # contain {dnet}
-live_list: ~/deflect-core/tests/edgemanage/tmp/edges.{dnet}.live
+live_list: /home/circleci/deflect-core/tests/edgemanage/tmp/edges.{dnet}.live
 
 # Canary interfaces - see the README for an explanation of how canary
 # interfaces work. The path can contain per-dnet files, mapping domain
