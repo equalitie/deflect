@@ -124,3 +124,8 @@ dev/edgemanage/state/*.state
 dev/edgemanage/tmp/*.live
 dev/edgemanage/edges/*
 !dev/edgemanage/edges/.gitkeep
+
+tests/edgemanage/bind/*.zone
+tests/edgemanage/health/*.edgestore
+tests/edgemanage/state/*.state
+tests/edgemanage/tmp/*.live

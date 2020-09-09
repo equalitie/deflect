@@ -5,13 +5,22 @@ orbs:
 
 jobs:
   build-and-test:
+    working_directory: /opt/deflect-core
     executor: python/default
     steps:
       - checkout
       - python/load-cache
       - python/install-deps
       - run: git submodule update --init
-      - run: cd edgemanage3 && sudo python setup.py install
+      - run:
+          command: cd edgemanage3 && sudo python setup.py install
+          name: Install edgemanage
+      - run:
+          command: edge_manage --config tests/edgemanage/edgemanage.yaml --dnet test
+          name: Init edgemanage
+      - run:
+          command: edge_query --config tests/edgemanage/edgemanage.yaml --dnet test
+          name: Test edge_query
       - python/save-cache
       - run:
           command: python test.py
