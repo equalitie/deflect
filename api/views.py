@@ -1,4 +1,3 @@
-import sys
 import django
 
 from rest_framework import status
@@ -15,7 +14,9 @@ def api_info(request):
         'debug': settings.DEBUG,
         'versions': {
             'django': django.get_version(),
-            'python': sys.version
+        },
+        'info': {
+            'edgemanage_config': settings.EDGEMANAGE_CONFIG
         }
     })
 

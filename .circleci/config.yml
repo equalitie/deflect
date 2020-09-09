@@ -19,7 +19,7 @@ jobs:
           command: edge_manage --config tests/edgemanage/edgemanage.yaml --dnet test
           name: Init edgemanage
       - run:
-          command: edge_query --config tests/edgemanage/edgemanage.yaml --dnet test
+          command: edge_query --config tests/edgemanage/edgemanage.yaml --dnet test -v
           name: Test edge_query
       - python/save-cache
       - run:
