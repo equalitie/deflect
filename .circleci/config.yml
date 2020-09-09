@@ -10,10 +10,10 @@ jobs:
       - checkout
       - python/load-cache
       - python/install-deps
-      - git submodule update --init
-      - cd edgemanage3
-      - python setup.py install
-      - cd ..
+      - run: git submodule update --init
+      - run: cd edgemanage3
+      - run: python setup.py install
+      - run: cd ..
       - python/save-cache
       - run:
           command: python test.py
