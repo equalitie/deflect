@@ -5,7 +5,7 @@ orbs:
 
 jobs:
   build-and-test:
-    working_directory: /opt/deflect-core
+    working_directory: ~/deflect-core
     executor: python/default
     steps:
       - checkout
