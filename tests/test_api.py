@@ -28,12 +28,26 @@ class APITestCase(TestCase):
         # Check if token is present in JSON body
         self.assertIn('token', response.json())
 
-
     def test_edge_query(self):
-        # Print info
         response = self.client.get('/api/edge/list', {
             'dnet': 'test'
         })
 
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
+
+    def test_dnet_query(self):
+        response = self.client.get('/api/edge/dnet')
+
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
+    def test_edge_conf(self):
+        response = self.client.post('/api/edge/config', {
+            'dnet': 'test',
+            'edge': 'deflect.ca',
+            'mode': 'unavailable',
+            'comment': 'test rotate',
+            'comment_user': 'circleci'
+        })
+        self.assertEqual(response.status_code, 201)
