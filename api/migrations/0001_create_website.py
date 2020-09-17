@@ -25,8 +25,8 @@ class Migration(migrations.Migration):
                 ('under_attack', models.BooleanField(default=False)),
                 ('awstats_password', models.CharField(max_length=40)),
                 ('ats_purge_secret', models.CharField(default=api.models.website.generate_ats_purge_secret, max_length=64)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
+                ('created_at', models.DateTimeField(auto_now_add=True, editable=True)),
+                ('updated_at', models.DateTimeField(auto_now=True, editable=True)),
             ],
         ),
     ]

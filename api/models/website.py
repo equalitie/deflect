@@ -60,5 +60,5 @@ class Website(models.Model):
     ats_purge_secret = models.CharField(max_length=64, default=generate_ats_purge_secret)
 
     # created = db.Column(db.DateTime, default=datetime.utcnow)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, editable=True)
+    updated_at = models.DateTimeField(auto_now=True, editable=True)
